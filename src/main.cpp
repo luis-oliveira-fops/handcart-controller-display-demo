@@ -432,7 +432,7 @@ void build_ui() {
     lv_obj_set_style_border_color(b_prev, COLOR_ACCENT, 0);
     lv_obj_set_style_border_width(b_prev, 2, 0);
     lv_obj_set_style_radius(b_prev, 4, 0);
-    lv_obj_add_event_cb(b_prev, tab_prev_cb, LV_EVENT_CLICKED, NULL);
+    lv_obj_add_event_cb(b_prev, tab_next_cb, LV_EVENT_CLICKED, NULL);
 
     lv_obj_t *lp = lv_label_create(b_prev);
     lv_label_set_text(lp, "◄");
@@ -448,7 +448,7 @@ void build_ui() {
     lv_obj_set_style_border_color(b_next, COLOR_ACCENT, 0);
     lv_obj_set_style_border_width(b_next, 2, 0);
     lv_obj_set_style_radius(b_next, 4, 0);
-    lv_obj_add_event_cb(b_next, tab_next_cb, LV_EVENT_CLICKED, NULL);
+    lv_obj_add_event_cb(b_next, tab_prev_cb, LV_EVENT_CLICKED, NULL);
 
     lv_obj_t *ln = lv_label_create(b_next);
     lv_label_set_text(ln, "►");
@@ -724,6 +724,7 @@ void build_ui() {
     lv_obj_set_style_text_color(lbl_demo_btn, lv_color_black(), 0);
     lv_obj_set_style_text_font(lbl_demo_btn, &lv_font_montserrat_12, 0);
     lv_obj_center(lbl_demo_btn);
+
 }
 
 /* =========================================================================================
@@ -810,12 +811,14 @@ void update_ui() {
             }
             break;
 
-        case 3: // KART / CARREGADOR
+        case 3: { // KART / CARREGADOR
             uint32_t mins = bms.session_seconds / 60;
             uint32_t secs = bms.session_seconds % 60;
             snprintf(buf, sizeof(buf), "ENERGIA: %.2f kWh  |  TEMPO: %lum %lus", bms.session_kwh, (unsigned long)mins, (unsigned long)secs);
             lv_label_set_text(lbl_chg_session, buf);
             break;
+        }
+
     }
 }
 
