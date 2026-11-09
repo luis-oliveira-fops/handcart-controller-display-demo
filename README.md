@@ -14,10 +14,10 @@ A UI está funcional e inclui:
 - Navegação entre quatro ecrãs através dos botões laterais.
 - Receção de mensagens CAN através do controlador TWAI do ESP32 a 500 kbps.
 
-O código ainda necessita de organização e refatoração. Neste momento a UI, a
-telemetria e os drivers estão concentrados principalmente em
-`src/main.cpp`, pelo que a separação por módulos deve ser feita numa fase
-seguinte.
+O código já foi separado por blocos principais, mas ainda necessita de
+organização e refatoração adicional. A UI, telemetria, CAN e simulador estão
+em módulos distintos, embora ainda existam melhorias futuras de estrutura e
+testes.
 
 ## Hardware
 
@@ -63,7 +63,11 @@ Esta versão está disponível no branch:
 
 ## Estrutura principal
 
-- `src/main.cpp`: aplicação, UI LVGL, modo DEMO e receção CAN.
+- `src/main.cpp`: inicialização do hardware, display LVGL e ciclo principal.
+- `src/ui_tabs.cpp`: construção da interface e atualização dos ecrãs.
+- `src/can_driver.cpp`: inicialização e descodificação do CAN/TWAI.
+- `src/simulator.cpp`: dados simulados do modo DEMO.
+- `include/`: interfaces dos módulos, modelo de telemetria, cores e callbacks.
 - `platformio.ini`: placa, framework, dependências e configuração dos pinos.
 
 ## Notas
